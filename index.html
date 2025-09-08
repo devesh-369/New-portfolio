@@ -305,36 +305,48 @@
     { type: "image", src: "my_work/2.png", title: "Graphic Design" },
 
 
-    { type: "video", src: "my_work/video 8.mp4", title: "Video Project" },
-    { type: "video", src: "my_work/nvidia.mp4", title: "Video Project" },
-    { type: "video", src: "my_work/cuda final VIDEO.mp4", title: "Video Project" },
-    { type: "video", src: "my_work/perplexity final vid.mp4", title: "Video Project" },
-    { type: "video", src: "my_work/video 9 final 01-1.mp4", title: "Video Project" },
+
+
+    { type: "youtube", src: "https://youtube.com/shorts/XpsuubgAGXU", title: "Video Project" },
+    { type: "youtube", src: "https://youtube.com/shorts/1IVX43bqDlI", title: "Video Project" },
+    { type: "youtube", src: "https://youtube.com/shorts/DuXgl2bSV5M", title: "Video Project" },
+
+    { type: "youtube", src: "https://youtube.com/shorts/nYHmpbDy2II", title: "Video Project" },
+    { type: "youtube", src: "https://youtube.com/shorts/0uVVkk2U6Jg", title: "Video Project" },
+    { type: "youtube", src: "https://youtube.com/shorts/I0jyuqE9rW8", title: "Video Project" },
 
   ];
   const gallery = document.getElementById("gallery");
 
-  works.forEach(work => {
-    const div = document.createElement("div");
-    div.classList.add("work-item");
 
-    if (work.type === "image") {
-      div.innerHTML = `
+  works.forEach(work => {
+  const div = document.createElement("div");
+  div.classList.add("work-item");
+
+  if (work.type === "image") {
+    div.innerHTML = `
       <img src="${work.src}" alt="${work.title}">
       <h3>${work.title}</h3>
     `;
-    } else {
-      div.innerHTML = `
-      <video controls playsinline muted>
-        <source src="${work.src}" type="video/mp4">
-        Your browser does not support the video tag.
-      </video>
+  } else if (work.type === "youtube") {
+    // Convert normal/shorts link to embed link
+    let embedLink = work.src.replace("youtube.com/shorts/", "youtube.com/embed/");
+    
+    div.innerHTML = `
+      <div class="video-container">
+        <iframe src="${embedLink}" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen>
+        </iframe>
+      </div>
       <h3>${work.title}</h3>
     `;
-    }
+  }
 
-    gallery.appendChild(div);
-  });
+  gallery.appendChild(div);
+});
+
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzCOhiUZoUlCSWHPt5wFbGxhAeaVVapqWkbGsybh0ZCWG2alGzcalYZxkOgJLJyQmgj/exec'; // Paste your Apps Script URL
 
 
